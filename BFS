@@ -1,0 +1,186 @@
+#include <iostream>
+#include <cstdio>
+#include <cstring>
+#include <map>
+#include <string>
+#include <vector>
+#include <cmath>
+#include <cctype>
+#include <sstream>
+#include <set>
+#include <list>
+#include <stack>
+#include <queue>
+#include <algorithm>
+#define sf scanf
+#define pf printf
+#define sfint(a,b) scanf("%d %d",&a,&b)
+#define sfl(a,b) scanf("%ld %ld",&a,&b)
+#define sfll(a,b) scanf("%lld %lld",&a,&b)
+#define sfd(a,b) scanf("%lf %lf",&a,&b)
+#define sff(a,b) scanf("%f %f",&a,&b)
+#define lp1(i,n) for(i=0;i<n;i++)
+#define lp2(i,n) for(i=1;i<=n;i++)
+#define LL long long
+#define L long
+#define mem(c,v) memset(c,v,sizeof(c))
+#define ui unsigned int
+#define cp(a) cout<<" "<<a<<" "<<endl
+#define ull unsigned long long int
+#define nl puts("")
+#define sq(x) ((x)*(x))
+#define all(x) x.begin(),x.end()
+#define mx7 20000100
+#define mx6 1500000
+#define mx5 100005
+#define inf 1<<30                                           //infinity value
+#define eps 1e-9
+#define mx (65540)
+#define mod 1000000007
+#define pb push_back
+#define pi acos(-1.0)
+#define sz size()
+#define gc getchar ()
+
+
+using namespace std;
+//..................................................................................................................
+
+template<class T> T setbit(T n, T pos){n=n|(1<<pos); return n;}
+template<class T> T checkbit(T n, T pos){n=n&(1<<pos); return n;}
+template<class T> T gcd(T a, T b ) {return b==0?a:gcd(b,a%b);}
+template<class T> T large(T a, T b ) {return a>b?a:b;}
+template<class T> T small(T a, T b ) {return a<b?a:b;}
+
+vector<int>G[100]; // declared a graph with 2D vector
+
+int level[100],par[100];
+bool visit[100];
+
+// in bfs actually the level is the main distance from one node to another node. So, we have to
+// handle level to find out the distance node to node.And we can not visit a node more than one time also.
+
+// bfs goes from the below::
+
+void bfs(int node, int source)
+{
+    memset(level,0,sizeof(level));
+    memset(par,0,sizeof(par));
+    memset(visit,false,sizeof(visit));
+    // just initialized the all array with 0 and false.
+
+    queue<int>Q;
+    // declared a queue data structure to keep the data or node value.
+
+    level[source]=0; // initially the source is in 0 mode
+    visit[source]=true; // initially we visit the source node for 1 time.
+    Q.push(source); // initially we just pushed the source value on the queue.
+
+    while(!Q.empty())
+    {
+        int u=Q.front();
+
+        for(int i=0;i<G[u].size();i++)
+        {
+            int v=G[u][i]; // took the size value of G[u]
+
+            if(!visit[v])
+            {
+                level[v]=level[u]+1;
+                par[v]=u;
+                visit[v]=true;
+                Q.push(v);
+            }
+        }
+
+        Q.pop();
+    }
+
+    for(int i=1;i<=node;i++)
+    {
+        cout << "Distance : " << source << " to " << i << " is " << level[i] << endl;
+    }
+}
+
+void path(int src, int endingnode)
+{
+    if(endingnode == src)
+    {
+        cout << src << " -> ";
+    }
+
+    else if(!par[endingnode])
+    {
+        cout << " no path here ..";
+    }
+
+    else
+    {
+        path(src,par[endingnode]);
+
+        cout << endingnode << " -> ";
+    }
+}
+
+int main()
+{
+    int node,edge; // declared node and edges
+
+    cout << "Enter number of Nodes (space) number of Edges: ";
+    cin >> node >> edge; // read node and edges
+
+    cout << "Take Nodes: (type 'Enter' button after taking each row of node)\n";
+
+    for(int i=1;i<=edge;i++)
+    {
+        cout << "for Edge " << i << " : ";
+
+        int x,y;
+        cin >> x >> y;
+
+        G[x].push_back(y);
+        G[y].push_back(x);
+
+        // inserted the values of x and y to the graph.
+    }
+
+    // showed the graph and see which node is connected exactly which one.
+
+    cout << "\n graph: \n";
+
+    for(int i=1;i<=node;i++)
+    {
+        cout << "for node " << i << " is connected with : ";
+
+        int sze = G[i].size();
+
+        for(int j=0;j<G[i].size();j++)
+        {
+            cout << G[i][j] << " ";
+
+            if(sze > 1)
+            {
+                cout << "and ";
+                sze--;
+            }
+        }
+
+        cout << endl;
+    }
+
+    cout << "\n Enter your Source node : ";
+    int src;
+    cin >> src;
+
+    bfs(node,src);
+
+    cout << "\n Enter your Ending node to see the Path from your Source node : ";
+    int endingnode;
+    cin >> endingnode;
+
+    cout << "\n Path : ";
+
+    path(src,endingnode);
+
+    return 0;
+}
