@@ -16,6 +16,7 @@ int main()
     vector<string>vs;
     vector<int>vi;
 
+    // input the strings
     for(int i=0;i<2;i++)
     {
         cin >> s1;
@@ -27,14 +28,15 @@ int main()
 //    sort(vs.begin(),vs.end());
 //    for(int i=0;i<vs.size();i++) cout << vs[i] << " ";
 
+    // distinct strings
     for(int i=0,j=1;i<vs.size();i++)
     {
         if(!mp[vs[i]])
         {
             //vi.push_back(j);
-            ar[slen].st=vs[i];
-            ar[slen++].sn=j;
-             j++;
+            ar[slen].st=vs[i]; // insert string into a structure array
+            ar[slen++].sn=j; //insert that string's position into a structure array
+             j++; // increasing the position.
         }
 
         mp[vs[i]]=true;
@@ -46,12 +48,15 @@ int main()
     {
         for(int j=0;j<slen;j++)
         {
-            if(vs[i] == ar[j].st)
+            if(vs[i] == ar[j].st) // matching the strings
             {
-                vi.push_back(ar[j].sn);
+                vi.push_back(ar[j].sn); // and insert their position into an integer vector.
             }
         }
     }
 
+    // printing their position
     for(int i=0;i<vi.size();i++) cout << vi[i] << " ";
+
+    return 0;
 }
