@@ -1,0 +1,134 @@
+/// Accepted
+
+/// Header file begin
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<map>
+#include<string>
+#include<vector>
+#include<cmath>
+#include<cctype>
+#include<sstream>
+#include<set>
+#include<list>
+#include<stack>
+#include<utility>
+#include<queue>
+#include<algorithm>
+#include<cstdlib>
+/// End
+//..........
+/// Macro
+#define sf scanf
+#define pf printf
+#define lp1(i,n) for(i=0;i<n;i++)
+#define lp2(i,n) for(i=1;i<=n;i++)
+#define mem(c,v) memset(c,v,sizeof(c))
+#define cp(a) cout<<" "<<a<<" "
+#define nl puts("")
+#define sq(x) ((x)*(x))
+#define all(x) x.begin(),x.end()
+#define reall(x) x.rbegin(),x.rend()
+#define sz size()
+#define gc getchar()
+#define pb push_back
+#define freader freopen("input.txt","r",stdin)
+/// End.........
+
+/// Size
+#define mx7 20000100
+#define mx6 1500000
+#define mx5 100005
+#define mx4 1000100
+#define inf 1<<30                                           //infinity value
+#define eps 1e-9
+#define mx (65540)
+#define mod 1000000007
+#define pi acos(-1.0)
+
+/// Macros for Graph
+
+#define white 1
+#define gray 2
+#define black 3
+#define nil 0
+
+using namespace std;
+/***************/
+
+/// typedef
+
+typedef long long LL;
+typedef long L;
+typedef unsigned long long ull;
+typedef unsigned long ul;
+typedef unsigned int ui;
+typedef pair<int, int> pii;
+typedef vector<int>vi;
+typedef vector<long long> vll;
+typedef vector<long>vl;
+typedef vector<char>vch;
+typedef vector<string>vs;
+typedef map<int,int>mpii;
+typedef map<int,bool>mpbi;
+typedef map<long,bool>mpbl;
+typedef map<long long,bool>mpbll;
+typedef map<char,int>mpci;
+typedef map<char,bool>mpbc;
+typedef map<string,int>mpsi;
+typedef map<long long,long long>mpll;
+
+/// template
+
+template<class T> T gcd(T a, T b ) {return b<=0?a:gcd(b,a%b);}
+template<class T> T large(T a, T b ) {return a>b?a:b;}
+template<class T> T small(T a, T b ) {return a<b?a:b;}
+template<class T> T diffrnce(T a, T b) {return a-b<0?b-a:a-b;}
+
+/// macros for seieve
+
+#define setbit(n) (prime[n>>6]|=((1<<(n>>1))&31))
+#define checkbit(n) (prime[n>>6]&((1<<(n>>1))&31))
+
+LL arr[mx4+6],brr[mx4+6],ans[mx4+6];
+
+int main()
+{
+    L test;
+    sf("%ld",&test);
+
+    for(L k=0;k<test;k++)
+    {
+        if(k>0)nl;
+        LL n,i;
+        sf("%lld",&n);
+
+        for(i=0;i<n;i++)
+        {
+            LL x,y;
+            sf("%lld %lld",&x,&y);
+            arr[i]=x;
+            brr[i]=y;
+        }
+
+        LL carry=0,len=0;
+
+        for(i=n-1;i>=0;i--)
+        {
+            carry += arr[i]+brr[i];
+            ans[len++]=carry%10;
+            carry=carry/10;
+        }
+
+        //for(i=0;i<n;i++)cout<<ans[i] << " ";
+        for(i=len-1;i>=0;i--)
+        {
+            pf("%lld",ans[i]);
+        }
+
+        nl;
+    }
+
+    return 0;
+}
