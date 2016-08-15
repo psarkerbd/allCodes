@@ -11,19 +11,19 @@ lea bx, revString; take it as 16 bit register to print by 21h register
 mov ax, 0;
 
 findLength:
-cmp [si], '$';
-je done;
-inc si;
-inc ax;
-inc bx;
+	cmp [si], '$';
+	je done;
+	inc si;
+	inc ax;
+	inc bx;
 jmp findLength;
 
 done:
-printn "Normal String: code";
-print "NormalString Length: ";
-call print_num_uns;
-mov cx, ax;
-sub ax, 1;
+	printn "Normal String: code";
+	print "NormalString Length: ";
+	call print_num_uns;
+	mov cx, ax;
+	sub ax, 1;
 ;call print_num_uns;
 lea si, normalString;
 mov [bx], '$'; insert '$' into the last index of revString
@@ -34,10 +34,10 @@ printn "";
 print "Reversed String: ";
 
 reverseProcess:
-mov dl, [si];
-mov [bx], dl;
-inc si;
-dec bx;
+	mov dl, [si];
+	mov [bx], dl;
+	inc si;
+	dec bx;
 loop reverseProcess;
 
 ; print the Reversed String
@@ -48,16 +48,16 @@ int 21h;
 printn "";
 
 load:
-lea bx, revString;
-lea si, normalString;
-mov cx, ax;
-mov ax, 0;
+	lea bx, revString;
+	lea si, normalString;
+	mov cx, ax;
+	mov ax, 0;
 
 findLengthbx:
-cmp [bx], '$';
-je done2;
-inc bx;
-inc ax;
+	cmp [bx], '$';
+	je done2;
+	inc bx;
+	inc ax;
 jmp findLengthbx;
 
 done2:
@@ -66,18 +66,18 @@ call print_num_uns;
 printn "";
 
 load_again:
-lea bx, revString;
-lea si, normalString;
-mov cx, ax;
-mov ax, 0;
+	lea bx, revString;
+	lea si, normalString;
+	mov cx, ax;
+	mov ax, 0;
 
 checkPalindrome:
-mov al, [si];
-mov dl, [bx];
-inc si;
-inc bx;
-cmp al, dl;
-jne decision;
+	mov al, [si];
+	mov dl, [bx];
+	inc si;
+	inc bx;
+	cmp al, dl;
+	jne decision;
 loop checkPalindrome;
 
 print "Decision: Palindrome";
