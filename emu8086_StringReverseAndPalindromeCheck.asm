@@ -1,3 +1,5 @@
+; visit the link for tutorial: https://faculty.kfupm.edu.sa/COE/shazli/coe205/Help/asm_tutorial_06.html
+
 org 100h
 include 'emu8086.inc'
 
